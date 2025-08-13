@@ -9,36 +9,72 @@ const quotes = [
 const quoteDisplay = document.getElementById("quoteDisplay");
 const newQuoteBtn = document.getElementById("newQuote");
 
-// Function to display a random quote
+// Display a random quote
 function showRandomQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const randomQuote = quotes[randomIndex];
   quoteDisplay.innerHTML = `<p><strong>${randomQuote.category}:</strong> "${randomQuote.text}"</p>`;
 }
 
-// Function to add a new quote
-function addQuote() {
-  const quoteText = document.getElementById("newQuoteText").value.trim();
-  const quoteCategory = document.getElementById("newQuoteCategory").value.trim();
+// Dynamically create a form to add quotes
+function createAddQuoteForm() {
+  if (document.getElementById("addQuoteForm")) return; // Prevent duplicates
 
-  if (quoteText === "" || quoteCategory === "") {
-    alert("Please enter both the quote text and category.");
-    return;
-  }
+  const form = document.createElement("form");
+  form.id = "addQuoteForm";
 
-  // Add new quote to array
-  quotes.push({ text: quoteText, category: quoteCategory });
+  // Quote text input
+  const quoteInput = document.createElement("input");
+  quoteInput.type = "text";
+  quoteInput.placeholder = "Enter a new quote";
+  quoteInput.required = true;
 
-  // Clear inputs
-  document.getElementById("newQuoteText").value = "";
-  document.getElementById("newQuoteCategory").value = "";
+  // Category input
+  const categoryInput = document.createElement("input");
+  categoryInput.type = "text";
+  categoryInput.placeholder = "Enter quote category";
+  categoryInput.required = true;
 
-  // Update DOM with the new quote
-  showRandomQuote();
+  // Submit button
+  const submitBtn = document.createElement("button");
+  submitBtn.type = "submit";
+  submitBtn.textContent = "Add Quote";
+
+  // Append inputs to form
+  form.appendChild(quoteInput);
+  form.appendChild(categoryInput);
+  form.appendChild(submitBtn);
+
+  // Form submit logic
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const quoteText = quoteInput.value.trim();
+    const quoteCategory = categoryInput.value.trim();
+
+    if (!quoteText || !quoteCategory) {
+      alert("Please enter both the quote and category.");
+      return;
+    }
+
+    // Add new quote to the array
+    quotes.push({ text: quoteText, category: quoteCategory });
+
+    // Clear inputs
+    quoteInput.value = "";
+    categoryInput.value = "";
+
+    // Update DOM
+    showRandomQuote();
+  });
+
+  // Append form to the page
+  document.body.appendChild(form);
 }
 
-// Event listener for "Show New Quote" button
+// Event listener for the "Show New Quote" button
 newQuoteBtn.addEventListener("click", showRandomQuote);
 
-// Display a random quote when the page loads
+// Initialize
 showRandomQuote();
+createAddQuoteForm();
