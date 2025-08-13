@@ -1,4 +1,4 @@
-// Existing quotes array
+// Array of quote objects
 const quotes = [
   { text: "The best way to get started is to quit talking and begin doing.", category: "Motivation" },
   { text: "Don’t let yesterday take up too much of today.", category: "Inspiration" },
@@ -16,7 +16,7 @@ function showRandomQuote() {
   quoteDisplay.innerHTML = `<p><strong>${randomQuote.category}:</strong> "${randomQuote.text}"</p>`;
 }
 
-// Function to add a new quote from user input
+// Function to add a new quote
 function addQuote() {
   const quoteText = document.getElementById("newQuoteText").value.trim();
   const quoteCategory = document.getElementById("newQuoteCategory").value.trim();
@@ -26,19 +26,19 @@ function addQuote() {
     return;
   }
 
-  // Add new quote to the array
+  // Add new quote to array
   quotes.push({ text: quoteText, category: quoteCategory });
 
-  // Clear input fields
+  // Clear inputs
   document.getElementById("newQuoteText").value = "";
   document.getElementById("newQuoteCategory").value = "";
 
-  alert("Quote added successfully!");
+  // Update DOM with the new quote
   showRandomQuote();
 }
 
 // Event listener for "Show New Quote" button
 newQuoteBtn.addEventListener("click", showRandomQuote);
 
-// Show a random quote when the page loads
+// Display a random quote when the page loads
 showRandomQuote();
