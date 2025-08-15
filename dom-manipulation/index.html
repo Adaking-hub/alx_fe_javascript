@@ -6,15 +6,23 @@
   <title>Dynamic Quote Generator</title>
 </head>
 <body>
-  <h1>Dynamic Quote Generator</h1>
+ <h1>Dynamic Quote Generator</h1>
 
-  <div id="quoteDisplay"></div>
+    <!-- Category Filter -->
+    <select id="categoryFilter" onchange="filterQuotes()">
+        <option value="all">All Categories</option>
+    </select>
 
-  <button id="newQuote">Show New Quote</button>
-  <button id="exportQuotes">Export Quotes (JSON)</button>
-  <button id="importQuotes" type="button">Import Quotes (JSON)</button>
-  <input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importFromJsonFile(event)" />
+    <!-- Quote Display -->
+    <div id="quoteDisplay"></div>
 
-  <script src="script.js"></script>
+    <!-- Controls -->
+    <button id="newQuote">Show New Quote</button>
+    <button id="exportQuotes">Export Quotes (JSON)</button>
+    <button id="importQuotes" type="button">Import Quotes (JSON)</button>
+    <input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importFromJsonFile(event)" />
+
+    <!-- Script -->
+    <script src="script.js"></script>
 </body>
 </html>
