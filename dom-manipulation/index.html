@@ -6,23 +6,43 @@
   <title>Dynamic Quote Generator</title>
 </head>
 <body>
- <h1>Dynamic Quote Generator</h1>
+ <h1>Dynamic Quote Generator (with Sync)</h1>
 
-    <!-- Category Filter -->
-    <select id="categoryFilter" onchange="filterQuotes()">
-        <option value="all">All Categories</option>
-    </select>
+  <!-- Category Filter -->
+  <select id="categoryFilter" onchange="filterQuotes()">
+    <option value="all">All Categories</option>
+  </select>
 
-    <!-- Quote Display -->
-    <div id="quoteDisplay"></div>
+  <!-- Sync Controls -->
+  <div>
+    <button id="syncNow">Sync Now</button>
+    <button id="clearConflicts">Clear Resolved Conflicts</button>
+  </div>
 
-    <!-- Controls -->
-    <button id="newQuote">Show New Quote</button>
-    <button id="exportQuotes">Export Quotes (JSON)</button>
-    <button id="importQuotes" type="button">Import Quotes (JSON)</button>
-    <input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importFromJsonFile(event)" />
+  <!-- Notification -->
+  <div id="syncNotification"></div>
 
-    <!-- Script -->
-    <script src="script.js"></script>
+  <!-- Quote Display -->
+  <div id="quoteDisplay"></div>
+
+  <!-- Controls -->
+  <button id="newQuote">Show New Quote</button>
+  <button id="exportQuotes">Export Quotes (JSON)</button>
+  <button id="importQuotes" type="button">Import Quotes (JSON)</button>
+  <input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importFromJsonFile(event)" />
+
+  <!-- Conflict modal -->
+  <div id="conflictOverlay"></div>
+  <div id="conflictModal" role="dialog" aria-modal="true" aria-labelledby="conflictTitle">
+    <h3 id="conflictTitle">Conflicts detected</h3>
+    <p>Server wins automatically, but you can review and revert any resolved conflict below.</p>
+    <div id="conflictList"></div>
+    <div style="text-align:right;">
+      <button id="closeConflicts">Close</button>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
 </body>
 </html>
